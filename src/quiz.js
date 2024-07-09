@@ -52,4 +52,11 @@ class Quiz {
             return true
         }
     }
+    filterQuestionsByDifficulty() {
+
+    }
+
+    averageDifficulty() {
+
+    }
 }
