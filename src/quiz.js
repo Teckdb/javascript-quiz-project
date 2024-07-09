@@ -52,11 +52,24 @@ class Quiz {
             return true
         }
     }
-    filterQuestionsByDifficulty() {
 
+    filterQuestionsByDifficulty(level) {
+        if (typeof level === "number") {
+            this.questions = this.questions.filter((eachquestion) => {
+                return eachquestion.difficulty == level
+            })
+        }
     }
 
     averageDifficulty() {
-
+        let counter = 0
+        const average = this.questions.reduce((acc, eachDificulty) => {
+            counter++
+            return acc + eachDificulty.difficulty
+        }, 0)
+        return average / counter
     }
+
 }
+
+console.log("prueba")
