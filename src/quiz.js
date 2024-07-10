@@ -54,7 +54,7 @@ class Quiz {
     }
 
     filterQuestionsByDifficulty(level) {
-        if (typeof level === "number") {
+        if (isNaN(difficulty) || !(difficulty > 0 && difficulty < 4) || typeof difficulty != 'number') {
             this.questions = this.questions.filter((eachquestion) => {
                 return eachquestion.difficulty == level
             })
