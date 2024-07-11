@@ -54,12 +54,42 @@ document.addEventListener("DOMContentLoaded", () => {
   timeRemainingContainer.innerText = `${minutes}:${seconds}`;
 
   // Show first question
+
+
   showQuestion();
 
 
   /************  TIMER  ************/
 
-  let timer;
+  let timerOperation = setInterval(handleTime, 100);
+
+
+  function handleTime() {
+
+    quiz.timeRemaining--
+
+    const minutes = Math.floor(quiz.timeRemaining / 60).toString().padStart(2, "0");
+    const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+
+    const timeRemainingContainer = document.getElementById("timeRemaining");
+    timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+
+
+    if (quiz.timeRemaining == 0) {
+      clearInterval(timerOperation)
+      showResults()
+    }
+
+  }
+
+  function restart() {
+    timerOperation = setInterval(handleTime, 1000);
+  }
+
+
+
+
+
 
 
   /************  EVENT LISTENERS  ************/
@@ -183,7 +213,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function showResults() {
 
     // YOUR CODE HERE:
-    //
+    clearInterval(timerOperation)
+
     // 1. Hide the quiz view (div#quizView)
     quizView.style.display = "none";
 
@@ -199,8 +230,10 @@ document.addEventListener("DOMContentLoaded", () => {
     quizView.style.display = "flex";
     quiz.currentQuestionIndex = 0;
     quiz.correctAnswers = 0;
+    quiz.timeRemaining = quizDuration;
     quiz.shuffleQuestions()
     showQuestion()
+    restart()
   }
 
 
